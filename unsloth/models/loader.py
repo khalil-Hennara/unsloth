@@ -102,6 +102,7 @@ class FastLanguageModel(FastLlamaModel):
         random_state               = 3407,
         max_lora_rank              = 64,
         disable_log_stats          = True,
+        skip_compilation           = False,
         *args, **kwargs,
     ):
         if load_in_8bit or full_finetuning:
@@ -123,6 +124,7 @@ class FastLanguageModel(FastLlamaModel):
                 return_logits              = False, # Return logits
                 fullgraph                  = True, # No graph breaks
                 use_exact_model_name       = use_exact_model_name,
+                skip_compilation           = skip_compilation,
                 *args, **kwargs,
             )
         pass
@@ -337,6 +339,7 @@ class FastLanguageModel(FastLlamaModel):
                 return_logits              = False, # Return logits
                 fullgraph                  = True, # No graph breaks
                 use_exact_model_name       = use_exact_model_name,
+                skip_compilation           = skip_compilation,
                 *args, **kwargs,
             )
         pass
@@ -492,6 +495,7 @@ class FastModel(FastBaseModel):
         whisper_language           = None,
         whisper_task               = None,
         unsloth_force_compile      = False,
+        skip_compilation           = False,
         *args, **kwargs,
     ):
         if token is None: token = get_token()
@@ -721,7 +725,7 @@ class FastModel(FastBaseModel):
                 debug                   = False,
                 fullgraph               = fullgraph,
                 import_from_cache       = False,
-                disable                 = False,
+                disable                 = skip_compilation,
                 return_logits           = return_logits,
                 trust_remote_code       = trust_remote_code,
                 unsloth_force_compile   = unsloth_force_compile,
