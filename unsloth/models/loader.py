@@ -492,6 +492,7 @@ class FastModel(FastBaseModel):
         whisper_language           = None,
         whisper_task               = None,
         unsloth_force_compile      = False,
+        skipe_compilation          = False,
         *args, **kwargs,
     ):
         if token is None: token = get_token()
@@ -721,7 +722,7 @@ class FastModel(FastBaseModel):
                 debug                   = False,
                 fullgraph               = fullgraph,
                 import_from_cache       = False,
-                disable                 = False,
+                disable                 = skipe_compilation,
                 return_logits           = return_logits,
                 trust_remote_code       = trust_remote_code,
                 unsloth_force_compile   = unsloth_force_compile,
